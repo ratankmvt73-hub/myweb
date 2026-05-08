@@ -1,0 +1,117 @@
+0:29:40 Memory Pressure: Critical
+0:29:45 Memory Pressure: Critical
+0:29:50 Memory Pressure: Critical
+0:29:55 Memory Pressure: Critical
+0:30:00 Memory Pressure: Critical
+0:30:05 Memory Pressure: Critical
+0:30:10 Memory Pressure: Critical
+0:30:15 Memory Pressure: Critical
+0:30:20 Memory Pressure: Critical
+0:30:25 Memory Pressure: Critical
+0:30:30 Memory Pressure: Critical
+0:30:35 Memory Pressure: Critical
+0:30:40 Memory Pressure: Critical
+0:30:45 Memory Pressure: Moderate
+0:30:55 Memory Pressure: Critical
+0:31:00 Memory Pressure: Moderate
+0:31:03 Widget Closed: StatusBubble
+0:31:05 Memory Pressure: Critical
+0:31:10 Memory Pressure: Critical
+0:31:15 Memory Pressure: Moderate
+0:31:25 Memory Pressure: Moderate
+0:31:30 Memory Pressure: Critical
+0:31:35 Memory Pressure: Critical
+0:31:40 Memory Pressure: Critical
+0:31:45 Memory Pressure: Critical
+0:31:50 Memory Pressure: Critical
+0:31:55 Memory Pressure: Moderate
+0:32:05 Memory Pressure: Moderate
+0:32:15 Memory Pressure: Moderate
+0:32:25 Memory Pressure: Moderate
+0:32:35 Memory Pressure: Moderate
+0:32:45 Memory Pressure: Moderate
+0:32:55 Memory Pressure: Moderate
+0:33:05 Memory Pressure: Moderate
+0:33:15 Memory Pressure: Moderate
+0:33:25 Memory Pressure: Moderate
+0:33:35 Memory Pressure: Moderate
+0:33:45 Memory Pressure: Moderate
+0:33:55 Memory Pressure: Moderate
+0:34:05 Memory Pressure: Moderate
+0:34:15 Memory Pressure: Moderate
+0:34:25 Memory Pressure: Moderate
+0:34:35 Memory Pressure: Moderate
+0:34:45 Memory Pressure: Moderate
+0:34:56 Browser1 Replaced Tab10 with Tab11 at 2
+0:34:56 Tab10 WebContentsDestroyed
+0:34:56 Memory Pressure: Critical
+0:35:00 Memory Pressure: Moderate
+0:35:10 Memory Pressure: Moderate
+0:35:20 Memory Pressure: Moderate
+0:35:30 Memory Pressure: Moderate
+0:35:35 Memory Pressure: Critical
+0:35:40 Memory Pressure: Critical
+0:35:45 Memory Pressure: Moderate
+0:35:50 Memory Pressure: Critical
+0:35:55 Memory Pressure: Critical
+0:36:00 Memory Pressure: Critical
+0:36:05 Memory Pressure: Critical
+0:36:10 Memory Pressure: Critical
+0:36:15 Memory Pressure: Critical
+0:36:20 Memory Pressure: Critical
+0:36:25 Memory Pressure: Critical
+0:36:30 Memory Pressure: Moderate
+0:36:40 Microsoft.Shutdown.ExitIgnoreUnloadHandlers
+0:36:41 Tab3 FinishNav51 ERR_ABORTED
+0:36:41 Tab1 RenderProcessGone
+0:36:41 Microsoft.Shutdown.OnShutdownStarting
+0:36:41 Microsoft.Shutdown.SetTryingToQuit_Quitting
+0:36:41 Microsoft.Shutdown.OnClosingAllBrowsers_Closing
+0:36:41 Microsoft.Shutdown.AttemptExit_QuitApplication
+0:36:41 Microsoft.Shutdown.CloseAllBrowsers
+0:36:41 Microsoft.Shutdown.StartClosingBrowsers
+0:36:41 Microsoft.Shutdown.SetTryingToQuit_Quitting
+0:36:41 Microsoft.Shutdown.SetTryingToQuit_Quitting
+0:36:41 Microsoft.Shutdown.CloseBrowsers_IgnoreUnloadHandlers
+0:36:41 Microsoft.Shutdown.OnWindowClosing
+0:36:41 Microsoft.Shutdown.TabStripModel.CloseAllTabs
+0:36:41 Microsoft.Shutdown.TabStripModel.CloseTabs
+0:36:41 Microsoft.Shutdown.TabStripModel.CloseTabs_EdgeBeforeClosingAllTabs
+0:36:41 Microsoft.Shutdown.TabStripModel.InternalCloseTabsImpl
+0:36:41 Microsoft.Shutdown.TabStripModel.InternalCloseTabsImpl_TabClosable
+0:36:41 Microsoft.Shutdown.TabStripModel.InternalCloseTabsImpl_TabClosable
+0:36:41 Microsoft.Shutdown.TabStripModel.InternalCloseTabsImpl_TabClosable
+0:36:41 Microsoft.Shutdown.TabStripModel.InternalCloseTabsImpl_ClosingAll
+0:36:41 Microsoft.Shutdown.TabStripModel.CloseWebContentses
+0:36:41 Microsoft.Shutdown.TabStripModel.RunUnloadListenerBeforeClosing_false
+0:36:41 Microsoft.Shutdown.TabStripModel.RunUnloadListenerBeforeClosing_false
+0:36:41 Microsoft.Shutdown.TabStripModel.RunUnloadListenerBeforeClosing_false
+0:36:41 Microsoft.Shutdown.TabStripModel.InternalCloseTabsImpl_ClosedAll
+0:36:41 Microsoft.Shutdown.TabStripModel.SendDetachWebContentsNotifications
+0:36:42 Browser1 Closed 3 tabs
+0:36:42 Tab11 WebContentsDestroyed
+0:36:42 Tab3 WebContentsDestroyed
+0:36:44 Tab1 WebContentsDestroyed
+0:36:44 Microsoft.UnloadController.TabStripEmpty
+0:36:44 Microsoft.Shutdown.OnWindowClosing
+0:36:44 Microsoft.Shutdown.OnWindowClosing_MaybeClearBrowsingDataOnExit
+0:36:44 Microsoft.Shutdown.OnWindowClosing_ClearBrowsingDataOnExitNotInProgress
+0:36:44 Microsoft.Shutdown.OnWindowClosingPostClearBrowsingData_NoBrowsingDataCleared
+0:36:44 Microsoft.Shutdown.OnWindowClosingPostClearBrowsingData_ShouldStartShutdown
+0:36:44 Widget Closed: BrowserWidget
+0:36:44 Microsoft.Shutdown.TabStripModel.CloseAllTabs
+0:36:44 Microsoft.Shutdown.TabStripModel.CloseTabs
+0:36:44 Microsoft.Shutdown.TabStripModel.CloseTabs_EdgeBeforeClosingAllTabs
+0:36:44 Microsoft.Shutdown.TabStripModel.InternalCloseTabsImpl
+0:36:44 Microsoft.Shutdown.TabStripModel.InternalCloseTabsImpl_NoTabsClosable
+0:36:44 Microsoft.Last_Browser_Removed
+0:36:44 Microsoft.Shutdown.NotifyAppTerminating
+0:36:44 Microsoft.Shutdown.OnAppExiting
+0:36:44 Microsoft.Shutdown.HandleAppExitingForPlatform_Aura
+0:36:44 Microsoft.Shutdown.HandleAppExitingForPlatform_Aura.NotificationUIManager_StartShutdown
+0:36:44 Microsoft.Shutdown.HandleAppExitingForPlatform_Aura.CloseAllSecondaryWidgets
+0:36:44 Widget Closed: BrowserWidget
+0:36:45 Microsoft.Shutdown.OnWindowClosing
+0:36:45 Microsoft.Shutdown.OnWindowClosing_DeleteScheduled
+0:36:45 Memory Pressure: Critical
+0:37:00 Shutdown

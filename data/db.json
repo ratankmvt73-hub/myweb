@@ -1,0 +1,87 @@
+{
+  "bookings": [],
+  "technicians": [
+    {
+      "id": "tech-1",
+      "name": "Narayan Kumar",
+      "phone": "9106915331",
+      "specialization": "All Services",
+      "experience": 8,
+      "area": "All Ahmedabad",
+      "status": "Active",
+      "notes": "Owner & Lead Technician"
+    },
+    {
+      "id": "tech-2",
+      "name": "Ramesh Meena",
+      "phone": "9876543210",
+      "specialization": "AC Repair & Service",
+      "experience": 5,
+      "area": "Malviya Nagar, Sanganer",
+      "status": "Active",
+      "notes": "Experienced split AC specialist"
+    }
+  ],
+  "services": [
+    {
+      "id": "svc-1",
+      "name": "AC Service & Repair",
+      "price": 349,
+      "description": "Complete diagnosis & repair",
+      "category": "Repair",
+      "status": "Active"
+    },
+    {
+      "id": "svc-2",
+      "name": "AC Installation",
+      "price": 1299,
+      "description": "Split, window & cassette setup",
+      "category": "Installation",
+      "status": "Active"
+    },
+    {
+      "id": "svc-3",
+      "name": "AC Gas Refill",
+      "price": 2199,
+      "description": "R22/R410A refrigerant top-up",
+      "category": "Gas Refill",
+      "status": "Active"
+    },
+    {
+      "id": "svc-4",
+      "name": "AC Deep Cleaning",
+      "price": 599,
+      "description": "Jet pump cleaning for pure airflow",
+      "category": "Cleaning",
+      "status": "Active"
+    },
+    {
+      "id": "svc-5",
+      "name": "Annual Maintenance (AMC)",
+      "price": 2999,
+      "description": "Year-round care with 4 scheduled visits",
+      "category": "Maintenance",
+      "status": "Active"
+    }
+  ],
+  "reviews": [
+    {
+      "id": "rev-1",
+      "name": "Rajesh Sharma",
+      "location": "Nikol, Ahmedabad",
+      "rating": 5,
+      "service": "AC Service & Repair",
+      "text": "Excellent service! Technician arrived on time and my AC is cooling like new.",
+      "visibility": "visible"
+    },
+    {
+      "id": "rev-2",
+      "name": "Priya Gupta",
+      "location": "Bodakdev, Ahmedabad",
+      "rating": 5,
+      "service": "AC Gas Refill",
+      "text": "Best AC gas refill in Ahmedabad. Fair pricing, no hidden charges.",
+      "visibility": "visible"
+    }
+  ]
+}

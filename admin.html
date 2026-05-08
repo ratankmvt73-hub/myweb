@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elite Cooling — Admin Panel</title>
+<link rel="icon" type="image/png" href="assets/ac-unit.png">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<!-- ====== LOGIN SCREEN ====== -->
+<div id="loginScreen" class="login-screen">
+  <div class="login-box">
+    <div class="login-logo">Elite<span>Cooling</span></div>
+    <p class="login-sub">Admin Panel — Secure Access</p>
+    <form id="loginForm">
+      <div class="login-field">
+        <i class="fas fa-user"></i>
+        <input type="text" id="loginUser" placeholder="Username" autocomplete="off">
+      </div>
+      <div class="login-field">
+        <i class="fas fa-lock"></i>
+        <input type="password" id="loginPass" placeholder="Password">
+        <button type="button" class="eye-btn" onclick="togglePass()"><i class="fas fa-eye" id="eyeIcon"></i></button>
+      </div>
+      <p class="login-error" id="loginError"></p>
+      <button type="submit" class="login-btn">Login to Admin</button>
+    </form>
+  </div>
+</div>
+
+<!-- ====== ADMIN APP ====== -->
+<div id="adminApp" class="admin-app hidden">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">Elite<span>Cooling</span></div>
+    <nav class="sidebar-nav">
+      <a href="#" class="nav-item active" data-page="dashboard"><i class="fas fa-th-large"></i><span>Dashboard</span></a>
+      <a href="#" class="nav-item" data-page="bookings"><i class="fas fa-calendar-check"></i><span>Bookings</span></a>
+      <a href="#" class="nav-item" data-page="technicians"><i class="fas fa-user-cog"></i><span>Technicians</span></a>
+      <a href="#" class="nav-item" data-page="services"><i class="fas fa-tools"></i><span>Services</span></a>
+      <a href="#" class="nav-item" data-page="reviews"><i class="fas fa-star"></i><span>Reviews</span></a>
+      <a href="#" class="nav-item logout-item" id="logoutBtn"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a>
+    </nav>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main-content">
+    <!-- TOPBAR -->
+    <div class="topbar">
+      <button type="button" class="menu-toggle-btn" id="sidebarToggle"><i class="fas fa-bars"></i></button>
+      <div class="topbar-title" id="pageTitle">Dashboard</div>
+      <div class="topbar-right">
+        <span class="admin-badge"><i class="fas fa-shield-alt"></i> Admin</span>
+        <a href="index.html" target="_blank" class="view-site-btn"><i class="fas fa-external-link-alt"></i> View Site</a>
+      </div>
+    </div>
+
+    <!-- PAGE CONTENT -->
+    <div class="page-body">
+
+      <!-- ========== DASHBOARD ========== -->
+      <div id="page-dashboard" class="page active">
+        <div class="stats-grid">
+          <div class="stat-card orange">
+            <div class="stat-icon"><i class="fas fa-calendar-check"></i></div>
+            <div class="stat-info"><h3 id="stat-bookings">0</h3><p>Total Bookings</p></div>
+          </div>
+          <div class="stat-card blue">
+            <div class="stat-icon"><i class="fas fa-user-cog"></i></div>
+            <div class="stat-info"><h3 id="stat-techs">0</h3><p>Technicians</p></div>
+          </div>
+          <div class="stat-card green">
+            <div class="stat-icon"><i class="fas fa-tools"></i></div>
+            <div class="stat-info"><h3 id="stat-services">0</h3><p>Services</p></div>
+          </div>
+          <div class="stat-card purple">
+            <div class="stat-icon"><i class="fas fa-star"></i></div>
+            <div class="stat-info"><h3 id="stat-reviews">0</h3><p>Reviews</p></div>
+          </div>
+          <div class="stat-card red">
+            <div class="stat-icon"><i class="fas fa-user-slash"></i></div>
+            <div class="stat-info"><h3 id="stat-blocked">0</h3><p>Blocked Techs</p></div>
+          </div>
+        </div>
+
+        <div class="dash-grid">
+          <div class="card">
+            <div class="card-header"><h4>Recent Bookings</h4></div>
+            <div class="card-body" id="recentBookings"><p class="empty-msg">No bookings yet.</p></div>
+          </div>
+          <div class="card">
+            <div class="card-header"><h4>Technician Status</h4></div>
+            <div class="card-body" id="techStatusList"><p class="empty-msg">No technicians yet.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== BOOKINGS ========== -->
+      <div id="page-bookings" class="page">
+        <div class="page-header">
+          <h2>Bookings</h2>
+          <button type="button" class="btn-add" onclick="openModal('addBooking')"><i class="fas fa-plus"></i> Add Booking</button>
+        </div>
+        <div class="filter-bar">
+          <input type="text" id="searchBooking" placeholder="Search by name, phone, service..." oninput="renderBookings()">
+          <select id="filterBookingStatus" onchange="renderBookings()">
+            <option value="">All Status</option>
+            <option value="Pending">Pending</option>
+            <option value="Confirmed">Confirmed</option>
+            <option value="Completed">Completed</option>
+            <option value="Cancelled">Cancelled</option>
+          </select>
+        </div>
+        <div class="table-wrap">
+          <table class="data-table" id="bookingsTable">
+            <thead>
+              <tr>
+                <th>#</th><th>Name</th><th>Phone</th><th>Service</th><th>Date</th><th>Address</th><th>Status</th><th>Technician</th><th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="bookingsBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ========== TECHNICIANS ========== -->
+      <div id="page-technicians" class="page">
+        <div class="page-header">
+          <h2>Technicians</h2>
+          <button type="button" class="btn-add" onclick="openModal('addTech')"><i class="fas fa-plus"></i> Add Technician</button>
+        </div>
+        <div class="filter-bar">
+          <input type="text" id="searchTech" placeholder="Search technicians..." oninput="renderTechnicians()">
+          <select id="filterTechStatus" onchange="renderTechnicians()">
+            <option value="">All</option>
+            <option value="Active">Active</option>
+            <option value="Blocked">Blocked</option>
+          </select>
+        </div>
+        <div class="tech-cards" id="techCards"></div>
+      </div>
+
+      <!-- ========== SERVICES ========== -->
+      <div id="page-services" class="page">
+        <div class="page-header">
+          <h2>Services & Pricing</h2>
+          <button type="button" class="btn-add" onclick="openModal('addService')"><i class="fas fa-plus"></i> Add Service</button>
+        </div>
+        <div class="filter-bar">
+          <input type="text" id="searchService" placeholder="Search services..." oninput="renderServices()">
+        </div>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr><th>#</th><th>Service Name</th><th>Price</th><th>Description</th><th>Status</th><th>Actions</th></tr>
+            </thead>
+            <tbody id="servicesBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ========== REVIEWS ========== -->
+      <div id="page-reviews" class="page">
+        <div class="page-header">
+          <h2>Customer Reviews</h2>
+          <button type="button" class="btn-add" onclick="openModal('addReview')"><i class="fas fa-plus"></i> Add Review</button>
+        </div>
+        <div class="reviews-admin-grid" id="reviewsAdminGrid"></div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<!-- ==================== MODALS ==================== -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal()"></div>
+
+<!-- Add/Edit Booking -->
+<div class="modal" id="modal-addBooking">
+  <div class="modal-header">
+    <h3 id="bookingModalTitle">Add Booking</h3>
+    <button type="button" onclick="closeModal()"><i class="fas fa-times"></i></button>
+  </div>
+  <div class="modal-body">
+    <input type="hidden" id="editBookingId">
+    <div class="form-row">
+      <div class="fm"><label>Customer Name</label><input id="bName" type="text" placeholder="Full Name"></div>
+      <div class="fm"><label>Phone</label><input id="bPhone" type="tel" placeholder="10-digit number" maxlength="10"></div>
+    </div>
+    <div class="form-row">
+      <div class="fm"><label>Service</label>
+        <select id="bService">
+          <option value="">Select Service</option>
+          <option>AC Service & Repair</option><option>AC Installation</option>
+          <option>AC Gas Refill</option><option>AC Deep Cleaning</option>
+          <option>Annual Maintenance (AMC)</option><option>AC Uninstallation</option>
+          <option>AC Not Cooling Repair</option><option>AC Water Leakage Repair</option>
+          <option>AC Noise / Vibration Fix</option><option>AC Compressor Repair</option>
+          <option>AC PCB / Circuit Repair</option><option>AC Fan Motor Replacement</option>
+          <option>AC Gas Leak Detection</option><option>AC Shifting / Relocation</option>
+          <option>AC Copper Pipe Fitting</option><option>AC Power Issue Repair</option>
+          <option>AC Thermostat / Sensor Fix</option><option>AC Remote + Display Repair</option>
+        </select>
+      </div>
+      <div class="fm"><label>Preferred Date</label><input id="bDate" type="date"></div>
+    </div>
+    <div class="fm"><label>Address</label><textarea id="bAddress" rows="2" placeholder="Customer address"></textarea></div>
+    <div class="form-row">
+      <div class="fm"><label>Status</label>
+        <select id="bStatus">
+          <option>Pending</option><option>Confirmed</option>
+          <option>Completed</option><option>Cancelled</option>
+        </select>
+      </div>
+      <div class="fm"><label>Assign Technician</label>
+        <select id="bTech"><option value="">Unassigned</option></select>
+      </div>
+    </div>
+    <div class="fm"><label>Notes</label><textarea id="bNotes" rows="2" placeholder="Any additional notes"></textarea></div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn-cancel" onclick="closeModal()">Cancel</button>
+    <button type="button" class="btn-save" onclick="saveBooking()">Save Booking</button>
+  </div>
+</div>
+
+<!-- Add/Edit Technician -->
+<div class="modal" id="modal-addTech">
+  <div class="modal-header">
+    <h3 id="techModalTitle">Add Technician</h3>
+    <button type="button" onclick="closeModal()"><i class="fas fa-times"></i></button>
+  </div>
+  <div class="modal-body">
+    <input type="hidden" id="editTechId">
+    <div class="form-row">
+      <div class="fm"><label>Full Name</label><input id="tName" type="text" placeholder="Technician name"></div>
+      <div class="fm"><label>Phone</label><input id="tPhone" type="tel" placeholder="10-digit number" maxlength="10"></div>
+    </div>
+    <div class="form-row">
+      <div class="fm"><label>Specialization</label>
+        <select id="tSpecialization">
+          <option>AC Repair & Service</option><option>AC Installation</option>
+          <option>Gas Refill & Leak Fix</option><option>PCB & Electrical</option>
+          <option>All Services</option>
+        </select>
+      </div>
+      <div class="fm"><label>Experience (Years)</label><input id="tExp" type="number" placeholder="e.g. 5" min="0"></div>
+    </div>
+    <div class="form-row">
+      <div class="fm"><label>Area / Zone</label><input id="tArea" type="text" placeholder="e.g. Malviya Nagar, Jhotwara"></div>
+      <div class="fm"><label>Status</label>
+        <select id="tStatus"><option>Active</option><option>Blocked</option></select>
+      </div>
+    </div>
+    <div class="fm"><label>Notes / Remarks</label><textarea id="tNotes" rows="2" placeholder="Any remarks"></textarea></div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn-cancel" onclick="closeModal()">Cancel</button>
+    <button type="button" class="btn-save" onclick="saveTechnician()">Save Technician</button>
+  </div>
+</div>
+
+<!-- Add/Edit Service -->
+<div class="modal" id="modal-addService">
+  <div class="modal-header">
+    <h3 id="serviceModalTitle">Add Service</h3>
+    <button type="button" onclick="closeModal()"><i class="fas fa-times"></i></button>
+  </div>
+  <div class="modal-body">
+    <input type="hidden" id="editServiceId">
+    <div class="form-row">
+      <div class="fm"><label>Service Name</label><input id="sName" type="text" placeholder="e.g. AC Gas Refill"></div>
+      <div class="fm"><label>Starting Price (Rs.)</label><input id="sPrice" type="number" placeholder="e.g. 599" min="0"></div>
+    </div>
+    <div class="fm"><label>Description</label><textarea id="sDesc" rows="2" placeholder="Short description"></textarea></div>
+    <div class="form-row">
+      <div class="fm"><label>Category</label>
+        <select id="sCategory">
+          <option>Repair</option><option>Installation</option>
+          <option>Cleaning</option><option>Gas Refill</option>
+          <option>Maintenance</option><option>Other</option>
+        </select>
+      </div>
+      <div class="fm"><label>Status</label>
+        <select id="sStatus"><option>Active</option><option>Inactive</option></select>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn-cancel" onclick="closeModal()">Cancel</button>
+    <button type="button" class="btn-save" onclick="saveService()">Save Service</button>
+  </div>
+</div>
+
+<!-- Add/Edit Review -->
+<div class="modal" id="modal-addReview">
+  <div class="modal-header">
+    <h3 id="reviewModalTitle">Add Review</h3>
+    <button type="button" onclick="closeModal()"><i class="fas fa-times"></i></button>
+  </div>
+  <div class="modal-body">
+    <input type="hidden" id="editReviewId">
+    <div class="form-row">
+      <div class="fm"><label>Customer Name</label><input id="rName" type="text" placeholder="Customer name"></div>
+      <div class="fm"><label>Location</label><input id="rLocation" type="text" placeholder="e.g. Memnagar, Ahmedabad"></div>
+    </div>
+    <div class="form-row">
+      <div class="fm"><label>Rating (1-5)</label><input id="rRating" type="number" min="1" max="5" value="5"></div>
+      <div class="fm"><label>Service Used</label>
+        <select id="rService">
+          <option>AC Service & Repair</option><option>AC Installation</option>
+          <option>AC Gas Refill</option><option>AC Deep Cleaning</option>
+          <option>Other</option>
+        </select>
+      </div>
+    </div>
+    <div class="fm"><label>Review Text</label><textarea id="rText" rows="3" placeholder="Customer review..."></textarea></div>
+    <div class="fm"><label>Visibility</label>
+      <select id="rVisible"><option value="visible">Visible (Show on Website)</option><option value="hidden">Hidden</option></select>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn-cancel" onclick="closeModal()">Cancel</button>
+    <button type="button" class="btn-save" onclick="saveReview()">Save Review</button>
+  </div>
+</div>
+
+<!-- Confirm Delete -->
+<div class="modal modal-sm" id="modal-confirmDelete">
+  <div class="modal-header">
+    <h3>Confirm Delete</h3>
+    <button type="button" onclick="closeModal()"><i class="fas fa-times"></i></button>
+  </div>
+  <div class="modal-body">
+    <p id="deleteConfirmMsg" style="color:var(--text-secondary);font-size:1rem;">Are you sure you want to delete this item?</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn-cancel" onclick="closeModal()">Cancel</button>
+    <button type="button" class="btn-delete-confirm" id="deleteConfirmBtn">Yes, Delete</button>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script src="admin.js"></script>
+</body>
+</html>

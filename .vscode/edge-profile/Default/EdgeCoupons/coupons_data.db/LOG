@@ -1,0 +1,10 @@
+2026/05/08-11:40:15.222 4a18 Reusing MANIFEST C:\Users\Admin\.gemini\antigravity\scratch\elite-cooling-solution\.vscode\edge-profile\Default\EdgeCoupons/coupons_data.db/MANIFEST-000001
+2026/05/08-11:40:15.279 4a18 Recovering log #4
+2026/05/08-11:40:15.418 4a18 Level-0 table #7: started
+2026/05/08-11:40:16.816 4a18 Level-0 table #7: 682316 bytes OK
+2026/05/08-11:40:16.832 4a18 Recovering log #7
+2026/05/08-11:40:16.837 4a18 Reusing old log C:\Users\Admin\.gemini\antigravity\scratch\elite-cooling-solution\.vscode\edge-profile\Default\EdgeCoupons/coupons_data.db/000007.log 
+2026/05/08-11:40:16.925 4a18 Delete type=0 #4
+2026/05/08-11:46:14.147 ad8 Level-0 table #9: started
+2026/05/08-11:46:14.154 ad8 Level-0 table #9: 682198 bytes OK
+2026/05/08-11:46:14.159 ad8 Delete type=0 #7

@@ -1,0 +1,6 @@
+2026/05/08-11:47:12.671 1d34 Creating DB C:\Users\Admin\.gemini\antigravity\scratch\elite-cooling-solution\.vscode\edge-profile\Default\IndexedDB\https_www.rocket.new_0.indexeddb.leveldb since it was missing.
+2026/05/08-11:47:12.682 1d34 Reusing MANIFEST C:\Users\Admin\.gemini\antigravity\scratch\elite-cooling-solution\.vscode\edge-profile\Default\IndexedDB\https_www.rocket.new_0.indexeddb.leveldb/MANIFEST-000001
+2026/05/08-11:58:58.726 1d34 Level-0 table #5: started
+2026/05/08-11:58:58.739 1d34 Level-0 table #5: 7549 bytes OK
+2026/05/08-11:58:58.746 1d34 Delete type=0 #3
+2026/05/08-11:58:58.748 4510 Manual compaction at level-0 from (begin) .. (end); will stop at (end)
