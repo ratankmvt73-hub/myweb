@@ -63,6 +63,10 @@
 </head>
 
 <body>
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-follower" id="cursorFollower"></div>
+  <div class="particles" id="particles"></div>
+  <div class="page-overlay" id="pageOverlay"></div>
 
   <div class="preloader" id="preloader">
     <div class="preloader-inner">
@@ -78,25 +82,40 @@
       <div class="brand" onclick="window.scrollTo({top:0,behavior:'smooth'})">Elite<span>Cooling</span></div>
       <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
       <ul class="nav-links" id="navLinks">
-        <li><a href="#services">Services</a></li>
-        <li><a href="#how">How It Works</a></li>
-        <li><a href="#pricing">Pricing</a></li>
-        <li><a href="#reviews">Reviews</a></li>
+        <li><a href="#services" class="scramble-link">Services</a></li>
+        <li><a href="#how" class="scramble-link">How It Works</a></li>
+        <li><a href="#pricing" class="scramble-link">Pricing</a></li>
+        <li><a href="#reviews" class="scramble-link">Reviews</a></li>
         <li><a href="#booking" class="btn-nav">Book Now</a></li>
       </ul>
     </div>
   </nav>
+
+  <div class="marquee-bar">
+    <div class="marquee-track">
+      <span><i class="fas fa-bolt"></i> Same Day Service</span>
+      <span><i class="fas fa-star"></i> 4.9/5 Rating</span>
+      <span><i class="fas fa-shield-alt"></i> 30-Day Warranty</span>
+      <span><i class="fas fa-user-check"></i> Verified Technicians</span>
+      <span><i class="fas fa-headset"></i> 24/7 Support</span>
+      <span><i class="fas fa-bolt"></i> Same Day Service</span>
+      <span><i class="fas fa-star"></i> 4.9/5 Rating</span>
+      <span><i class="fas fa-shield-alt"></i> 30-Day Warranty</span>
+      <span><i class="fas fa-user-check"></i> Verified Technicians</span>
+      <span><i class="fas fa-headset"></i> 24/7 Support</span>
+    </div>
+  </div>
 
   <section class="hero">
     <canvas id="heroParticles" class="hero-particles"></canvas>
     <div class="hero-container">
       <div class="hero-content reveal">
         <span class="hero-tag"><i class="fas fa-shield-alt"></i> Ahmedabad's #1 Rated</span>
-        <h1>Premium <span>AC Service</span> at Your Doorstep</h1>
-        <p class="hero-sub">Expert AC repair, deep cleaning, installation & gas refill by certified technicians. Same-day service across Ahmedabad.</p>
+        <h1 class="shimmer-text">Premium <span>AC Service</span> at Your Doorstep</h1>
+        <p class="hero-sub"><span class="typewriter" data-text="Expert AC repair, deep cleaning, installation & gas refill by certified technicians. Same-day service across Ahmedabad."></span></p>
         <div class="hero-cta-group">
-          <a href="#booking" class="btn-primary btn-glow"><i class="fas fa-calendar-check"></i> Book Service Now</a>
-          <a href="tel:+919106915331" class="btn-outline btn-call"><i class="fas fa-phone-alt"></i> Call Us</a>
+          <a href="#booking" class="btn-primary btn-glow magnetic"><i class="fas fa-calendar-check"></i> Book Service Now</a>
+          <a href="tel:+919106915331" class="btn-outline btn-call magnetic"><i class="fas fa-phone-alt"></i> Call Us</a>
         </div>
         <div class="hero-trust">
           <div class="trust-item"><i class="fas fa-check-circle"></i> Background Verified</div>
@@ -476,27 +495,28 @@
           <div class="form-group"><input type="tel" id="phone" placeholder="Phone Number" required pattern="[0-9]{10}"
               maxlength="10"></div>
           <div class="form-group">
-            <select id="service" required>
-              <option value="">Select Service</option>
-              <option>AC Service & Repair</option>
-              <option>AC Installation</option>
-              <option>AC Gas Refill</option>
-              <option>AC Deep Cleaning</option>
-              <option>Annual Maintenance (AMC)</option>
-              <option>AC Uninstallation</option>
-              <option>AC Not Cooling Repair</option>
-              <option>AC Water Leakage Repair</option>
-              <option>AC Noise / Vibration Fix</option>
-              <option>AC Compressor Repair</option>
-              <option>AC PCB / Circuit Repair</option>
-              <option>AC Fan Motor Replacement</option>
-              <option>AC Gas Leak Detection</option>
-              <option>AC Shifting / Relocation</option>
-              <option>AC Copper Pipe Fitting</option>
-              <option>AC Power Issue Repair</option>
-              <option>AC Thermostat / Sensor Fix</option>
-              <option>AC Remote + Display Repair</option>
-            </select>
+            <label class="service-label">Select a Service</label>
+            <div class="service-options" id="serviceOptions">
+              <div class="service-opt" data-value="AC Service & Repair" data-price="349"><span>AC Service & Repair</span><b>Rs. 349</b></div>
+              <div class="service-opt" data-value="AC Installation" data-price="1299"><span>AC Installation</span><b>Rs. 1,299</b></div>
+              <div class="service-opt" data-value="AC Gas Refill" data-price="2199"><span>AC Gas Refill</span><b>Rs. 2,199</b></div>
+              <div class="service-opt" data-value="AC Deep Cleaning" data-price="599"><span>AC Deep Cleaning</span><b>Rs. 599</b></div>
+              <div class="service-opt" data-value="Annual Maintenance (AMC)" data-price="2999"><span>Annual Maintenance (AMC)</span><b>Rs. 2,999</b></div>
+              <div class="service-opt" data-value="AC Uninstallation" data-price="499"><span>AC Uninstallation</span><b>Rs. 499</b></div>
+              <div class="service-opt" data-value="AC Not Cooling Repair" data-price="549"><span>AC Not Cooling Repair</span><b>Rs. 549</b></div>
+              <div class="service-opt" data-value="AC Water Leakage Repair" data-price="399"><span>AC Water Leakage Repair</span><b>Rs. 399</b></div>
+              <div class="service-opt" data-value="AC Noise / Vibration Fix" data-price="449"><span>AC Noise / Vibration Fix</span><b>Rs. 449</b></div>
+              <div class="service-opt" data-value="AC Compressor Repair" data-price="1499"><span>AC Compressor Repair</span><b>Rs. 1,499</b></div>
+              <div class="service-opt" data-value="AC PCB / Circuit Repair" data-price="1199"><span>AC PCB / Circuit Repair</span><b>Rs. 1,199</b></div>
+              <div class="service-opt" data-value="AC Fan Motor Replacement" data-price="899"><span>AC Fan Motor Replacement</span><b>Rs. 899</b></div>
+              <div class="service-opt" data-value="AC Gas Leak Detection" data-price="649"><span>AC Gas Leak Detection</span><b>Rs. 649</b></div>
+              <div class="service-opt" data-value="AC Shifting / Relocation" data-price="1799"><span>AC Shifting / Relocation</span><b>Rs. 1,799</b></div>
+              <div class="service-opt" data-value="AC Copper Pipe Fitting" data-price="150"><span>AC Copper Pipe Fitting</span><b>Rs. 150/m</b></div>
+              <div class="service-opt" data-value="AC Power Issue Repair" data-price="349"><span>AC Power Issue Repair</span><b>Rs. 349</b></div>
+              <div class="service-opt" data-value="AC Thermostat / Sensor Fix" data-price="499"><span>AC Thermostat / Sensor Fix</span><b>Rs. 499</b></div>
+              <div class="service-opt" data-value="AC Remote + Display Repair" data-price="299"><span>AC Remote + Display Repair</span><b>Rs. 299</b></div>
+            </div>
+            <input type="hidden" id="service" required>
           </div>
           <div class="form-group"><input type="date" id="date" placeholder="Preferred Date"></div>
           <div class="form-group">

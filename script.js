@@ -1,8 +1,152 @@
 'use strict';
 
 /* =========================================
-   ELITE COOLING - URBAN COMPANY STYLE JS
+   ELITE COOLING - PREMIUM ANIMATIONS
    ========================================= */
+
+// ================== CUSTOM CURSOR ==================
+const cursor = document.getElementById('cursor');
+const follower = document.getElementById('cursorFollower');
+let mouseX = 0, mouseY = 0, fX = 0, fY = 0;
+
+if (!window.matchMedia('(pointer: coarse)').matches && cursor && follower) {
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX; mouseY = e.clientY;
+    cursor.style.left = mouseX - 6 + 'px';
+    cursor.style.top = mouseY - 6 + 'px';
+  });
+  function animateFollower() {
+    fX += (mouseX - fX) * 0.15;
+    fY += (mouseY - fY) * 0.15;
+    follower.style.left = fX - 20 + 'px';
+    follower.style.top = fY - 20 + 'px';
+    requestAnimationFrame(animateFollower);
+  }
+  animateFollower();
+
+  document.querySelectorAll('a, button, .service-opt, .service-tile, .pricing-card').forEach(el => {
+    el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+    el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+  });
+} else {
+  cursor?.remove(); follower?.remove();
+  document.body.style.cursor = 'auto';
+}
+
+// ================== FLOATING PARTICLES ==================
+const particlesContainer = document.getElementById('particles');
+if (particlesContainer) {
+  for (let i = 0; i < 18; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    const size = Math.random() * 80 + 40;
+    p.style.width = size + 'px';
+    p.style.height = size + 'px';
+    p.style.left = Math.random() * 100 + '%';
+    p.style.top = Math.random() * 100 + '%';
+    p.style.animationDelay = Math.random() * 10 + 's';
+    p.style.animationDuration = (12 + Math.random() * 10) + 's';
+    particlesContainer.appendChild(p);
+  }
+}
+
+// ================== 3D CARD TILT ==================
+document.querySelectorAll('.service-tile, .pricing-card').forEach(card => {
+  card.classList.add('tilt-3d');
+  card.addEventListener('mousemove', (e) => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const cx = rect.width / 2;
+    const cy = rect.height / 2;
+    const rx = (y - cy) / cy * -8;
+    const ry = (x - cx) / cx * 8;
+    card.style.transform = `perspective(1000px) rotateX(${rx}deg) rotateY(${ry}deg) scale3d(1.02, 1.02, 1.02)`;
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+  });
+});
+
+// ================== ENHANCED SCROLL REVEAL ==================
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('revealed');
+      entry.target.style.opacity = '1';
+      entry.target.style.transform = 'translateY(0) rotateX(0)';
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(40px) rotateX(10deg)';
+  el.style.transition = 'opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+  revealObserver.observe(el);
+});
+
+// ================== PARALLAX HERO IMAGE ==================
+window.addEventListener('scroll', () => {
+  const heroImg = document.querySelector('.hero-image img');
+  if (heroImg) {
+    const scrollY = window.scrollY;
+    heroImg.style.transform = `translateY(${scrollY * 0.15}px) scale(1.05)`;
+  }
+});
+
+// ================== TYPEWRITER EFFECT ==================
+document.querySelectorAll('.typewriter').forEach(el => {
+  const text = el.dataset.text;
+  if (!text) return;
+  el.textContent = '';
+  let i = 0;
+  function type() {
+    if (i < text.length) {
+      el.textContent += text.charAt(i);
+      i++;
+      setTimeout(type, 30 + Math.random() * 40);
+    }
+  }
+  setTimeout(type, 800);
+});
+
+// ================== MAGNETIC BUTTONS ==================
+document.querySelectorAll('.magnetic').forEach(btn => {
+  btn.addEventListener('mousemove', (e) => {
+    const rect = btn.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+    btn.style.transform = `translate(${x * 0.25}px, ${y * 0.25}px)`;
+  });
+  btn.addEventListener('mouseleave', () => {
+    btn.style.transform = 'translate(0, 0)';
+  });
+});
+
+// ================== TEXT SCRAMBLE ==================
+const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*';
+document.querySelectorAll('.scramble-link').forEach(link => {
+  const original = link.textContent;
+  let interval = null;
+  link.addEventListener('mouseenter', () => {
+    let iteration = 0;
+    clearInterval(interval);
+    interval = setInterval(() => {
+      link.textContent = original.split('').map((char, index) => {
+        if (index < iteration) return original[index];
+        return chars[Math.floor(Math.random() * chars.length)];
+      }).join('');
+      if (iteration >= original.length) clearInterval(interval);
+      iteration += 1 / 2;
+    }, 30);
+  });
+  link.addEventListener('mouseleave', () => {
+    clearInterval(interval);
+    link.textContent = original;
+  });
+});
 
 // ================== PRELOADER ==================
 const preloader = document.getElementById('preloader');
@@ -43,16 +187,7 @@ backToTop?.addEventListener('click', () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
-// ================== SCROLL REVEAL ==================
-const revealObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('active');
-      revealObserver.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.1 });
-document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+// Old reveal observer replaced by enhanced 3D version at file top
 
 // ================== COUNTER ANIMATION ==================
 const counterObserver = new IntersectionObserver((entries) => {
@@ -437,7 +572,6 @@ document.getElementById('btnPayOnline')?.addEventListener('click', async () => {
     const data = await res.json();
     if (data.url) {
       localStorage.setItem('ec_service', service);
-      localStorage.setItem('ec_amount', document.querySelector('.tile-price b')?.textContent || '');
       window.location.href = data.url;
     } else {
       throw new Error(data.error || 'Payment session failed');
@@ -447,4 +581,14 @@ document.getElementById('btnPayOnline')?.addEventListener('click', async () => {
     btn.disabled = false;
     btn.innerHTML = '<i class="fas fa-credit-card"></i> Pay Securely & Book Online';
   }
+});
+
+// ================== SERVICE CARD SELECTOR ==================
+document.querySelectorAll('.service-opt').forEach(opt => {
+  opt.addEventListener('click', () => {
+    document.querySelectorAll('.service-opt').forEach(o => o.classList.remove('selected'));
+    opt.classList.add('selected');
+    document.getElementById('service').value = opt.dataset.value;
+    localStorage.setItem('ec_amount', 'Rs. ' + opt.dataset.price);
+  });
 });
