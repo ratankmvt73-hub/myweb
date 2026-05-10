@@ -548,65 +548,37 @@ locationBtn?.addEventListener('click', () => {
   );
 });
 
-// ================== RAZORPAY PAY ONLINE ==================
-document.getElementById('btnPayOnline')?.addEventListener('click', async () => {
-  const form = document.getElementById('whatsapp-form');
+// ================== DIRECT UPI PAYMENT ==================
+document.getElementById('btnPayOnline')?.addEventListener('click', () => {
   const name = document.getElementById('name').value.trim();
   const phone = document.getElementById('phone').value.trim();
   const service = document.getElementById('service').value;
-  const date = document.getElementById('date')?.value || 'ASAP';
   const address = document.getElementById('address').value.trim();
+  const amountStr = localStorage.getItem('ec_amount') || '349';
+  const amount = amountStr.replace(/[^0-9]/g, '');
 
   if (!name || !phone || !service || !address) {
     alert('Please fill Name, Phone, Service and Address first.');
-    form.querySelector('[required]:invalid')?.focus();
+    document.getElementById('whatsapp-form').querySelector('[required]:invalid')?.focus();
     return;
   }
 
-  const btn = document.getElementById('btnPayOnline');
-  btn.disabled = true;
-  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Opening Payment...';
+  // UPI Deep Link for Mobile Apps (GPay, PhonePe, Paytm, etc.)
+  // pa = VPA (Virtual Payment Address), pn = Payee Name, am = Amount, cu = Currency
+  const upiId = '9106915331@upi'; 
+  const upiLink = `upi://pay?pa=${upiId}&pn=Elite%20Cooling&am=${amount}&cu=INR`;
 
-  try {
-    const apiBase = window.location.protocol.startsWith('http') ? window.location.origin : '';
-    const res = await fetch(`${apiBase}/api/create-checkout-session`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, phone, service, address, date })
-    });
-    const data = await res.json();
-    
-    if (data.key_id && data.order_id) {
-      const options = {
-        key: data.key_id,
-        amount: data.amount,
-        currency: data.currency,
-        name: data.name,
-        description: data.description,
-        order_id: data.order_id,
-        handler: function(response) {
-          localStorage.setItem('ec_service', service);
-          localStorage.setItem('ec_amount', (data.amount / 100).toString());
-          window.location.href = '/payment-success.html?payment_id=' + response.razorpay_payment_id;
-        },
-        prefill: {
-          name: name,
-          contact: phone
-        },
-        theme: {
-          color: '#2563eb'
-        }
-      };
-      const rzp = new Razorpay(options);
-      rzp.open();
-    } else {
-      throw new Error(data.error || 'Payment session failed');
+  // Try to open UPI apps
+  window.location.href = upiLink;
+
+  // Fallback for Desktop or if app doesn't open
+  setTimeout(() => {
+    const confirmMsg = `If UPI apps didn't open automatically, please pay Rs. ${amount} to 9106915331 via GPay/PhonePe/Paytm and share the screenshot on WhatsApp.\n\nClick OK to open WhatsApp for sharing screenshot.`;
+    if (confirm(confirmMsg)) {
+      const waText = encodeURIComponent(`Hi! I just paid Rs. ${amount} via UPI for ${service}. Here is my screenshot.`);
+      window.location.href = `https://wa.me/919106915331?text=${waText}`;
     }
-  } catch (err) {
-    alert('Payment failed: ' + err.message);
-    btn.disabled = false;
-    btn.innerHTML = '<i class="fas fa-credit-card"></i> Pay Securely & Book Online';
-  }
+  }, 1500);
 });
 
 // ================== SERVICE CARD SELECTOR ==================
