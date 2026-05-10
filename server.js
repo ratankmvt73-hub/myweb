@@ -2,18 +2,23 @@ require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const fs = require('fs/promises');
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const Razorpay = require('razorpay');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 const DATA_FILE = path.join(__dirname, 'data', 'db.json');
+
+const razorpay = new Razorpay({
+  key_id: process.env.RAZORPAY_KEY_ID,
+  key_secret: process.env.RAZORPAY_KEY_SECRET
+});
 
 app.use(express.json());
 app.use(require('cors')());
 app.use(express.static(path.join(__dirname)));
 
 /* =========================================
-   STRIPE CHECKOUT
+   RAZORPAY CHECKOUT
    ========================================= */
 const SERVICE_PRICES = {
   'AC Service & Repair': { amount: 34900, desc: 'Full system diagnosis & repair' },
@@ -45,27 +50,25 @@ app.post('/api/create-checkout-session', async (req, res) => {
 
   const origin = req.headers.origin || `http://localhost:${PORT}`;
   try {
-    const session = await stripe.checkout.sessions.create({
-      payment_method_types: ['card', 'upi'],
-      line_items: [{
-        price_data: {
-          currency: 'inr',
-          product_data: {
-            name: service,
-            description: priceData.desc
-          },
-          unit_amount: priceData.amount
-        },
-        quantity: 1
-      }],
-      mode: 'payment',
-      success_url: `${origin}/payment-success.html?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${origin}/index.html#booking`,
-      metadata: { name, phone, service, address, date: date || 'ASAP' }
+    const options = {
+      amount: priceData.amount,
+      currency: 'INR',
+      receipt: `booking_${Date.now()}`,
+      notes: {
+        name, phone, service, address, date: date || 'ASAP'
+      }
+    };
+    const order = await razorpay.orders.create(options);
+    res.json({ 
+      key_id: process.env.RAZORPAY_KEY_ID,
+      order_id: order.id,
+      amount: order.amount,
+      currency: order.currency,
+      name: service,
+      description: priceData.desc
     });
-    res.json({ url: session.url });
   } catch (err) {
-    console.error('Stripe error:', err);
+    console.error('Razorpay error:', err);
     res.status(500).json({ error: 'Payment session failed. Try again.' });
   }
 });

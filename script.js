@@ -543,7 +543,7 @@ locationBtn?.addEventListener('click', () => {
   );
 });
 
-// ================== STRIPE PAY ONLINE ==================
+// ================== RAZORPAY PAY ONLINE ==================
 document.getElementById('btnPayOnline')?.addEventListener('click', async () => {
   const form = document.getElementById('whatsapp-form');
   const name = document.getElementById('name').value.trim();
@@ -560,7 +560,7 @@ document.getElementById('btnPayOnline')?.addEventListener('click', async () => {
 
   const btn = document.getElementById('btnPayOnline');
   btn.disabled = true;
-  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Redirecting to Stripe...';
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Opening Payment...';
 
   try {
     const apiBase = window.location.protocol.startsWith('http') ? window.location.origin : '';
@@ -570,9 +570,30 @@ document.getElementById('btnPayOnline')?.addEventListener('click', async () => {
       body: JSON.stringify({ name, phone, service, address, date })
     });
     const data = await res.json();
-    if (data.url) {
-      localStorage.setItem('ec_service', service);
-      window.location.href = data.url;
+    
+    if (data.key_id && data.order_id) {
+      const options = {
+        key: data.key_id,
+        amount: data.amount,
+        currency: data.currency,
+        name: data.name,
+        description: data.description,
+        order_id: data.order_id,
+        handler: function(response) {
+          localStorage.setItem('ec_service', service);
+          localStorage.setItem('ec_amount', (data.amount / 100).toString());
+          window.location.href = '/payment-success.html?payment_id=' + response.razorpay_payment_id;
+        },
+        prefill: {
+          name: name,
+          contact: phone
+        },
+        theme: {
+          color: '#2563eb'
+        }
+      };
+      const rzp = new Razorpay(options);
+      rzp.open();
     } else {
       throw new Error(data.error || 'Payment session failed');
     }
