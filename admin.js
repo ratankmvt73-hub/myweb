@@ -182,15 +182,15 @@ function renderBookings() {
   tbody.innerHTML = rows.map((b, i) => {
     const tech = DB.technicians.find(t => t.id === b.techId);
     return `<tr>
-      <td>${i + 1}</td>
-      <td><strong>${esc(b.name)}</strong></td>
-      <td>${esc(b.phone)}</td>
-      <td>${esc(b.service)}</td>
-      <td>${b.date || '—'}</td>
-      <td style="max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="${esc(b.address)}">${esc(b.address)}</td>
-      <td>${badge(b.status, statusMap)}</td>
-      <td>${tech ? esc(tech.name) : '<span style="color:var(--text-muted)">Unassigned</span>'}</td>
-      <td><div class="action-btns">
+      <td data-label="#">${i + 1}</td>
+      <td data-label="Name"><strong>${esc(b.name)}</strong></td>
+      <td data-label="Phone">${esc(b.phone)}</td>
+      <td data-label="Service">${esc(b.service)}</td>
+      <td data-label="Date">${b.date || '—'}</td>
+      <td data-label="Address" style="max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="${esc(b.address)}">${esc(b.address)}</td>
+      <td data-label="Status">${badge(b.status, statusMap)}</td>
+      <td data-label="Technician">${tech ? esc(tech.name) : '<span style="color:var(--text-muted)">Unassigned</span>'}</td>
+      <td data-label="Actions"><div class="action-btns">
         <button class="btn-icon btn-icon-edit" title="Edit" onclick="editBooking('${b.id}')"><i class="fas fa-pen"></i></button>
         <button class="btn-icon btn-icon-delete" title="Delete" onclick="confirmDelete('booking','${b.id}')"><i class="fas fa-trash"></i></button>
       </div></td>
@@ -353,12 +353,12 @@ function renderServices() {
   if (!list.length) { tbody.innerHTML = `<tr><td colspan="6" class="empty-msg">No services found.</td></tr>`; return; }
   tbody.innerHTML = list.map((s, i) => `
     <tr>
-      <td>${i + 1}</td>
-      <td><strong>${esc(s.name)}</strong><br><small style="color:var(--text-muted)">${esc(s.category)}</small></td>
-      <td><strong style="color:var(--orange)">Rs. ${s.price.toLocaleString()}</strong></td>
-      <td style="max-width:200px;color:var(--text-secondary);font-size:0.85rem">${esc(s.description)}</td>
-      <td>${badge(s.status, statusMap)}</td>
-      <td><div class="action-btns">
+      <td data-label="#">${i + 1}</td>
+      <td data-label="Service Name"><strong>${esc(s.name)}</strong><br><small style="color:var(--text-muted)">${esc(s.category)}</small></td>
+      <td data-label="Price"><strong style="color:var(--orange)">Rs. ${s.price.toLocaleString()}</strong></td>
+      <td data-label="Description" style="max-width:200px;color:var(--text-secondary);font-size:0.85rem">${esc(s.description)}</td>
+      <td data-label="Status">${badge(s.status, statusMap)}</td>
+      <td data-label="Actions"><div class="action-btns">
         <button class="btn-icon btn-icon-edit" onclick="editService('${s.id}')"><i class="fas fa-pen"></i></button>
         <button class="btn-icon btn-icon-delete" onclick="confirmDelete('service','${s.id}')"><i class="fas fa-trash"></i></button>
       </div></td>
