@@ -171,7 +171,7 @@ Build a professional, conversion-optimized website for booking AC services onlin
 
 ### 6.3 Environment Variables
 ```env
-STRIPE_SECRET_KEY=sk_test_xxxxxxxxxxxxxxxxxxxxxxxx
+STRIPE_SECRET_KEY=sk_test_YOUR_STRIPE_SECRET_KEY_HERE
 # or sk_live_... for production
 ```
 

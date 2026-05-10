@@ -624,48 +624,39 @@ section { padding: 5rem 5%; max-width: 1200px; margin: 0 auto; }
 
 /* Location Button */
 .address-container {
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 .btn-location {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  background: var(--primary-light);
+  width: 100%;
+  background: linear-gradient(135deg, var(--primary-light), #e0e7ff);
   color: var(--primary-dark);
-  border: none;
-  border-radius: 50px;
-  padding: 0.4rem 0.8rem;
-  font-size: 0.75rem;
+  border: 1.5px dashed var(--primary);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 1rem;
+  font-size: 0.9rem;
   font-weight: 700;
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 0.4rem;
+  justify-content: center;
+  gap: 0.5rem;
   transition: var(--transition);
-  z-index: 5;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 .btn-location:hover {
   background: var(--primary);
   color: #fff;
-  transform: translateY(-1px);
+  border-style: solid;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(37,99,235,0.2);
 }
 .btn-location i {
-  font-size: 0.8rem;
+  font-size: 1rem;
 }
 .btn-location.loading {
   opacity: 0.7;
   cursor: wait;
-}
-@media (max-width: 480px) {
-  .btn-location {
-    position: relative;
-    top: 0;
-    right: 0;
-    margin-bottom: 0.5rem;
-    width: 100%;
-    justify-content: center;
-  }
 }
 
 /* =========================================
