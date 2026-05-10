@@ -657,6 +657,42 @@
     <i class="fas fa-chevron-up"></i>
   </button>
 
+  <!-- PAYMENT MODAL -->
+  <div class="payment-modal" id="paymentModal">
+    <div class="pm-content">
+      <button class="pm-close" id="closePaymentModal">&times;</button>
+      <div class="pm-header">
+        <i class="fas fa-shield-alt"></i>
+        <h3>Secure UPI Payment</h3>
+        <p>Pay for <span id="modalService">Service</span></p>
+      </div>
+      <div class="pm-body">
+        <div class="qr-container">
+          <img id="upiQrCode" src="" alt="UPI QR Code">
+          <p>Scan with GPay, PhonePe, Paytm</p>
+        </div>
+        <div class="amount-display">
+          <span>Amount to Pay</span>
+          <h2>Rs. <span id="modalAmount">0</span></h2>
+        </div>
+        <div class="vpa-display">
+          <p>UPI ID: <strong>9106915331@upi</strong></p>
+        </div>
+        <div class="pm-actions">
+          <a href="#" id="payViaAppBtn" class="btn-app-pay">
+            <i class="fas fa-mobile-alt"></i> Open UPI App
+          </a>
+          <button onclick="confirmUPIScreenshot()" class="btn-wa-confirm">
+            <i class="fab fa-whatsapp"></i> Shared Screenshot
+          </button>
+        </div>
+      </div>
+      <div class="pm-footer">
+        <p><i class="fas fa-lock"></i> 100% Safe & Secure Direct Payment</p>
+      </div>
+    </div>
+  </div>
+
   <script src="script.js" defer></script>
 </body>
 </html>

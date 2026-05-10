@@ -548,7 +548,9 @@ locationBtn?.addEventListener('click', () => {
   );
 });
 
-// ================== DIRECT UPI PAYMENT ==================
+// ================== DIRECT UPI PAYMENT MODAL ==================
+const paymentModal = document.getElementById('paymentModal');
+
 document.getElementById('btnPayOnline')?.addEventListener('click', () => {
   const name = document.getElementById('name').value.trim();
   const phone = document.getElementById('phone').value.trim();
@@ -563,23 +565,40 @@ document.getElementById('btnPayOnline')?.addEventListener('click', () => {
     return;
   }
 
-  // UPI Deep Link for Mobile Apps (GPay, PhonePe, Paytm, etc.)
-  // pa = VPA (Virtual Payment Address), pn = Payee Name, am = Amount, cu = Currency
-  const upiId = '9106915331@upi'; 
+  // Update Modal Content
+  document.getElementById('modalAmount').textContent = amount;
+  document.getElementById('modalService').textContent = service;
+  
+  const upiId = '9106915331@upi';
   const upiLink = `upi://pay?pa=${upiId}&pn=Elite%20Cooling&am=${amount}&cu=INR`;
+  
+  // Generate QR Code via API
+  const qrImg = document.getElementById('upiQrCode');
+  qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(upiLink)}`;
+  
+  // Set link for Mobile Button
+  document.getElementById('payViaAppBtn').href = upiLink;
 
-  // Try to open UPI apps
-  window.location.href = upiLink;
-
-  // Fallback for Desktop or if app doesn't open
-  setTimeout(() => {
-    const confirmMsg = `If UPI apps didn't open automatically, please pay Rs. ${amount} to 9106915331 via GPay/PhonePe/Paytm and share the screenshot on WhatsApp.\n\nClick OK to open WhatsApp for sharing screenshot.`;
-    if (confirm(confirmMsg)) {
-      const waText = encodeURIComponent(`Hi! I just paid Rs. ${amount} via UPI for ${service}. Here is my screenshot.`);
-      window.location.href = `https://wa.me/919106915331?text=${waText}`;
-    }
-  }, 1500);
+  // Show Modal
+  paymentModal.classList.add('open');
 });
+
+// Close Modal Logic
+document.getElementById('closePaymentModal')?.addEventListener('click', () => {
+  paymentModal.classList.remove('open');
+});
+
+paymentModal?.addEventListener('click', (e) => {
+  if (e.target === paymentModal) paymentModal.classList.remove('open');
+});
+
+function confirmUPIScreenshot() {
+  const amount = document.getElementById('modalAmount').textContent;
+  const service = document.getElementById('modalService').textContent;
+  const waText = encodeURIComponent(`Hi! I just paid Rs. ${amount} via UPI for ${service}. Here is my screenshot.`);
+  window.location.href = `https://wa.me/919106915331?text=${waText}`;
+}
+window.confirmUPIScreenshot = confirmUPIScreenshot;
 
 // ================== SERVICE CARD SELECTOR ==================
 document.querySelectorAll('.service-opt').forEach(opt => {

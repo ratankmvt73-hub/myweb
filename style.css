@@ -844,3 +844,75 @@ footer { background: linear-gradient(180deg, #141a2b 0%, #0a101d 100%); color: #
   .whatsapp-float { bottom: 20px; left: 20px; width: 50px; height: 50px; font-size: 1.6rem; }
   .back-to-top { bottom: 20px; right: 20px; width: 45px; height: 45px; }
 }
+/* =========================================
+   PAYMENT MODAL STYLES
+   ========================================= */
+.payment-modal {
+  position: fixed; inset: 0; z-index: 10001;
+  background: rgba(10, 16, 29, 0.85);
+  backdrop-filter: blur(10px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 1rem; opacity: 0; visibility: hidden;
+  transition: all 0.4s cubic-bezier(0.76, 0, 0.24, 1);
+}
+.payment-modal.open { opacity: 1; visibility: visible; }
+
+.pm-content {
+  background: #fff; width: 100%; max-width: 420px;
+  border-radius: 24px; position: relative;
+  overflow: hidden; box-shadow: 0 30px 100px rgba(0,0,0,0.5);
+  transform: translateY(30px); transition: transform 0.4s ease;
+}
+.payment-modal.open .pm-content { transform: translateY(0); }
+
+.pm-close {
+  position: absolute; top: 1.2rem; right: 1.2rem;
+  background: #f0f4f8; border: none; width: 32px; height: 32px;
+  border-radius: 50%; font-size: 1.2rem; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  z-index: 10;
+}
+
+.pm-header {
+  background: linear-gradient(135deg, #1E3A5F, #0A2540);
+  color: #fff; padding: 2.5rem 2rem 1.5rem; text-align: center;
+}
+.pm-header i { font-size: 2rem; color: #2ecc71; margin-bottom: 1rem; }
+.pm-header h3 { font-size: 1.4rem; margin-bottom: 0.3rem; }
+.pm-header p { opacity: 0.7; font-size: 0.9rem; }
+
+.pm-body { padding: 2rem; text-align: center; }
+
+.qr-container {
+  background: #fff; border: 1px solid #eee; padding: 1rem;
+  border-radius: 16px; margin-bottom: 1.5rem; display: inline-block;
+}
+.qr-container img { width: 180px; height: 180px; margin-bottom: 0.8rem; }
+.qr-container p { font-size: 0.75rem; color: #666; font-weight: 600; }
+
+.amount-display { margin-bottom: 1.5rem; }
+.amount-display span { font-size: 0.8rem; color: #999; text-transform: uppercase; font-weight: 700; }
+.amount-display h2 { font-size: 2.2rem; color: #0A2540; font-weight: 900; }
+
+.vpa-display { background: #f8fafc; padding: 0.8rem; border-radius: 10px; margin-bottom: 1.5rem; }
+.vpa-display p { font-size: 0.85rem; color: #475569; }
+
+.pm-actions { display: grid; gap: 0.8rem; }
+.btn-app-pay {
+  background: #2563EB; color: #fff; padding: 1rem; border-radius: 12px;
+  text-decoration: none; font-weight: 700; display: flex; align-items: center;
+  justify-content: center; gap: 0.6rem; transition: 0.3s;
+}
+.btn-app-pay:hover { background: #1D4ED8; transform: translateY(-2px); }
+
+.btn-wa-confirm {
+  background: #fff; color: #25D366; padding: 0.9rem; border-radius: 12px;
+  border: 2px solid #25D366; font-family: inherit; font-weight: 700;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  gap: 0.6rem; transition: 0.3s;
+}
+.btn-wa-confirm:hover { background: #25D366; color: #fff; }
+
+.pm-footer { padding: 1rem; text-align: center; background: #f8fafc; border-top: 1px solid #eee; }
+.pm-footer p { font-size: 0.75rem; color: #999; font-weight: 600; }
+.pm-footer i { color: #2ecc71; margin-right: 4px; }
