@@ -414,7 +414,12 @@ document.getElementById('whatsapp-form')?.addEventListener('submit', (e) => {
   const date = document.getElementById('date')?.value || 'ASAP';
   const address = document.getElementById('address').value.trim();
 
-  let text = `ELITE COOLING - NEW BOOKING%0A%0AName: ${name}%0APhone: ${phone}%0AService: ${service}%0APreferred Date: ${date}%0AAddress: ${address}`;
+  let text = `ELITE COOLING - NEW BOOKING%0A%0A` +
+    `*Name:* ${encodeURIComponent(name)}%0A` +
+    `*Phone:* ${encodeURIComponent(phone)}%0A` +
+    `*Service:* ${encodeURIComponent(service)}%0A` +
+    `*Preferred Date:* ${encodeURIComponent(date)}%0A` +
+    `*Address:* ${encodeURIComponent(address)}`;
   
   if (currentCoords) {
     text += `%0AMap Link: https://www.google.com/maps?q=${currentCoords.latitude},${currentCoords.longitude}`;

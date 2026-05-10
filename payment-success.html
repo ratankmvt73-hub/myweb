@@ -95,11 +95,11 @@
 </div>
 
 <script>
-  // Parse session_id from URL and fetch details if you have a backend endpoint
+  // Parse payment_id from URL (sent by Razorpay handler in script.js)
   const params = new URLSearchParams(window.location.search);
-  const sessionId = params.get('session_id');
-  if (sessionId) {
-    document.getElementById('txnId').textContent = sessionId.slice(-12).toUpperCase();
+  const paymentId = params.get('payment_id');
+  if (paymentId) {
+    document.getElementById('txnId').textContent = paymentId.slice(-12).toUpperCase();
   }
   // Try to restore service name from localStorage (set before redirect)
   const service = localStorage.getItem('ec_service') || 'AC Service';

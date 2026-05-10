@@ -79,7 +79,7 @@ function loadAllData() {
   } else {
     // Seed default data
     DB.technicians = [
-      { id: uid(), name: 'Narayan Kumar', phone: '9106915331', specialization: 'All Services', experience: 8, area: 'All Ahmedabad', status: 'Active', notes: 'Owner & Lead Technician' },
+      { id: uid(), name: 'Narayan Kumawat', phone: '9106915331', specialization: 'All Services', experience: 8, area: 'All Ahmedabad', status: 'Active', notes: 'Owner & Lead Technician' },
       { id: uid(), name: 'Ramesh Meena', phone: '9876543210', specialization: 'AC Repair & Service', experience: 5, area: 'Memnagar, Ahmedabad', status: 'Active', notes: '' },
     ];
     DB.services = [

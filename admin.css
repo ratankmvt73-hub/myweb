@@ -537,42 +537,6 @@ body {
 
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; }
 
-.fm label { font-size: 0.8rem; font-weight: 700; color: var(--text-secondary); }
-  position: fixed; top: 50%; left: 50%;
-  transform: translate(-50%, -45%) scale(0.95);
-  z-index: 500; background: #fff;
-  border-radius: var(--radius);
-  width: 90%; max-width: 560px;
-  max-height: 90vh; overflow-y: auto;
-  box-shadow: 0 24px 80px rgba(0,0,0,0.25);
-  display: none; opacity: 0;
-  transition: all 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-.modal.open {
-  display: block; opacity: 1;
-  transform: translate(-50%, -50%) scale(1);
-}
-.modal-sm { max-width: 380px; }
-
-.modal-header {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--border);
-  position: sticky; top: 0; background: #fff; z-index: 2;
-}
-.modal-header h3 { font-size: 1rem; font-weight: 800; }
-.modal-header > button {
-  width: 32px; height: 32px; border-radius: 8px;
-  background: var(--main-bg); border: none;
-  font-size: 0.85rem; color: var(--text-secondary);
-  cursor: pointer; display: flex; align-items: center; justify-content: center;
-  transition: var(--transition);
-}
-.modal-header > button:hover { background: rgba(239,68,68,0.1); color: var(--red); }
-
-.modal-body { padding: 1.5rem; display: flex; flex-direction: column; gap: 0.9rem; }
-
-.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; }
-
 .fm { display: flex; flex-direction: column; gap: 0.35rem; }
 .fm label { font-size: 0.8rem; font-weight: 700; color: var(--text-secondary); }
 .fm input, .fm select, .fm textarea {
